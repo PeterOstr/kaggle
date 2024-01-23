@@ -1,1 +1,1 @@
-This is project for kaggle trainings and competitions
+This is project for kaggle trainings and competitions where we make classification of jellyfish types
