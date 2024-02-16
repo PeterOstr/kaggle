@@ -1,2 +1,6 @@
 data
 train_data_mc.npz
+model3_.h5
+model_1.h5
+model_2.h5
+model_jelly_conv.joblib
