@@ -1,13 +1,12 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, UploadFile, File
+from typing import List
 import pandas as pd
 import numpy as np
-from pydantic import BaseModel
-from typing import List
-from fastapi.staticfiles import StaticFiles
 from keras.models import load_model
+from pydantic import BaseModel
 import tensorflow as tf
 from PIL import Image
-
+import io
 
 app = FastAPI()
 
@@ -30,17 +29,15 @@ jelly_type_df = pd.DataFrame({
 model = load_model('C:/Users/Peter/DataspellProjects/kaggle/jellyfish_image_classification/model_new.h5')
 
 @app.post("/model/predict")
-async def predict(data: ImageData):
-    contents = await data.image_file.read()
-    image = Image.open(io.BytesIO(contents)).convert("RGB")
-    image_resized = image.resize((224, 224))
-
-    image_tensor = tf.keras.preprocessing.image.img_to_array(image_resized)
-    image_tensor = np.expand_dims(image_tensor, axis=0)  # Добавляем измерение пакета
-
-    result = model.predict(image_tensor)
-    max_index = np.argmax(result)
-
-    predicted_jellyfish_type = jelly_type_df.iloc[max_index, 0]
-
-    return predicted_jellyfish_type
+async def predict(image_file: UploadFile = File(...)):
+    try:
+        contents = await image_file.read()
+        image = Image.open(io.BytesIO(contents))
+        image_resized = image.resize((224, 224))
+        image_tensor = tf.keras.preprocessing.image.img_to_array(image_resized)
+        result = model.predict(np.expand_dims(image_tensor, axis=0))
+        max_index = np.argmax(result)
+        predicted_jellyfish_type = jelly_type_df.iloc[max_index, 0]
+        return predicted_jellyfish_type
+    except Exception as e:
+        return {"error": str(e)}
