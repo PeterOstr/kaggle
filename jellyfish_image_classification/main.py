@@ -27,7 +27,7 @@ jelly_type_df = pd.DataFrame({
     5: ['mauve_stinger_jellyfish']
 }).T
 
-model = load_model('C:/Users/Peter/DataspellProjects/kaggle/jellyfish_image_classification/model_new.h5')
+model = load_model('model_new.h5')
 
 @app.post("/model/predict")
 async def predict(image_file: UploadFile = File(...)):
