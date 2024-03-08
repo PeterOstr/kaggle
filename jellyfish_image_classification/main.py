@@ -57,8 +57,11 @@ async def predict(image_file: UploadFile = File(...)):
             max_index = np.argmax(result)
             predicted_jellyfish_type = jelly_type_df.iloc[max_index, 0]
             return predicted_jellyfish_type
+
         else:
-            return {f"Seems it is no jellyfish on the image sent, but looks like it is: {decoded_preds}"}
+            answer = {f"Seems like there is no jellyfish on the image sent, but it looks like a: {decoded_preds}"}
+            return answer
+
     except Exception as e:
         return {"error": str(e)}
 
