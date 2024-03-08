@@ -5,8 +5,26 @@ import requests
 
 # Header and text
 st.title("Image classification using the Jellyfish Image Dataset as an example")
-st.write("""This dashboard will present the info about the COVID-19 dataset, taken from 
+st.write("""This is training dashboard with the info about the Jellyfish, taken from 
 Kaggle platform (https://www.kaggle.com/datasets/anshtanwar/jellyfish-types/data)).""")
+
+with st.expander("See notes"):
+    st.write("""
+        * We predicting 6 types of Jellyfish:
+            - Moon jellyfish (Aurelia aurita): Common jellyfish with four horseshoe-shaped gonads visible through the 
+            top of its translucent bell. It feeds by collecting medusae, plankton, and mollusks with its tentacles.
+            - Barrel jellyfish (Rhizostoma pulmo): Largest jellyfish found in British waters, with a bell that can grow
+             up to 90 cm in diameter. It feeds on plankton and small fish by catching them in its tentacles.
+            - Blue jellyfish (Cyanea lamarckii): Large jellyfish that can grow up to 30 cm in diameter. It feeds on 
+            plankton and small fish by catching them in its tentacles.
+            - Compass jellyfish (Chrysaora hysoscella): Named after the brown markings on its bell that resemble a 
+            compass rose. It feeds on plankton and small fish by catching them in its tentacles.
+            - Lion’s mane jellyfish (Cyanea capillata): Largest jellyfish in the world, with a bell 
+            that can grow up to 2 meters in diameter and tentacles that can reach up to 30 meters in length. It feeds on plankton and small fish by catching them in its tentacles.
+            - Mauve stinger (Pelagia noctiluca): Small jellyfish with long tentacles 
+            and warty structures on its bell full of stinging cells. It feeds on other small jellyfish and oceanic sea squirts.
+        
+        """)
 
 # Button to upload image
 uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
@@ -20,33 +38,24 @@ if st.button('Send'):
     if uploaded_file is not None:
         # Send the image to the backend
         # Define the URLs for the two endpoints
-        url1 = "https://jellyapp-unk2qlgpqa-lm.a.run.app/classify_image/"
-        url2 = "https://jellyapp-unk2qlgpqa-lm.a.run.app/model/predict"
+        url = "https://jellyapi-unk2qlgpqa-lm.a.run.app/model/predict"
 
 
 
-        files1 = {'image_file': uploaded_file}
-        files2 = {'image_file': uploaded_file}
+        files = {'image_file': uploaded_file}
 
-        response1 = requests.post(url1, files=files1)
-        response2 = requests.post(url2, files=files2)
+        response = requests.post(url, files=files)
 
         # Check the response code and display the results
-        if response1.status_code == 200:
-            result = response1.json()
+        if response.status_code == 200:
+            result = response.json()
             st.write('Predictions:')
             # for prediction in result['predictions']:
             #     st.write(f"Class: {prediction['class_name']}, Probability: {prediction['probability']}")
-            st.write(result)
+            st.write(result[0])
         else:
-            st.error(f"Error sending the image: {response1.status_code}")
+            st.error(f"Error sending the image: {response.status_code}")
 
-        if response2.status_code == 200:
-            result2 = response2.json()
-            st.write('Class:')
-            st.write(result2)
-        else:
-            st.error(f"Error sending the image: {response2.status_code}")
 
 
 if st.button('Send2'):
@@ -56,7 +65,7 @@ if st.button('Send2'):
 
     # Send the image to the backend
         # Define the URLs for the two endpoints
-        url1 = "https://jellyapp-unk2qlgpqa-lm.a.run.app/classify_image/"
+        url1 = "https://jellyapi-unk2qlgpqa-lm.a.run.app/classify_image/"
         url2 = "https://jellyapp-unk2qlgpqa-lm.a.run.app/model/predict"
         response2 = requests.post(url2, files=files)
 
