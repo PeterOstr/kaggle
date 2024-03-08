@@ -36,10 +36,29 @@ async def predict(image_file: UploadFile = File(...)):
         image = Image.open(io.BytesIO(contents))
         image_resized = image.resize((224, 224))
         image_tensor = tf.keras.preprocessing.image.img_to_array(image_resized)
-        result = model.predict(np.expand_dims(image_tensor, axis=0))
-        max_index = np.argmax(result)
-        predicted_jellyfish_type = jelly_type_df.iloc[max_index, 0]
-        return predicted_jellyfish_type
+
+
+
+        image_tensor_preprocessed = preprocess_input(image_tensor)
+
+        # Compile the model manually
+        model_50.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+
+        # Add batch dimension and preprocess input
+        #preds = model_50.predict(image_tensor_preprocessed)
+        preds = model_50.predict(np.expand_dims(image_tensor_preprocessed, axis=0))
+
+        # Decode predictions
+        decoded_preds = decode_predictions(preds, top=1)[0][0][1]  # Top n predictions
+
+        if decoded_preds == 'jellyfish':
+            result = model.predict(np.expand_dims(image_tensor, axis=0))
+            max_index = np.argmax(result)
+            predicted_jellyfish_type = jelly_type_df.iloc[max_index, 0]
+            return predicted_jellyfish_type
+        else:
+            return {f"Seems it is no jellyfish on the image sent, but looks like it is: {decoded_preds}"}
     except Exception as e:
         return {"error": str(e)}
 
@@ -79,3 +98,4 @@ async def classify_image(image_file: UploadFile = File(...)):
 
     #return {"predictions": predictions}
     return decoded_preds
+#%%
