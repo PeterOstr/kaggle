@@ -81,3 +81,21 @@ st.sidebar.info("Feel free to contact me\n"'\n'
                 "[My Linkedin](https://www.linkedin.com/in/ostrikpeter/)\n"'\n'
                 "[Or just text me in Telegram](https://t.me/Politejohn)\n"
                 ".")
+
+st.write(""" ### About this app here
+
+Initializing the FastAPI Application: A web application is created using FastAPI, which handles HTTP requests.
+
+Image Processing: Users can upload images through the web interface of the application.
+
+Predicting Jellyfish Type in the Image: Upon uploading an image, the application utilizes a neural network to 
+analyze the image and predict the type of jellyfish present in it.
+
+Image Classification using ResNet50: Additionally, the application can classify the image using a pre-trained 
+ResNet50 model to determine its content.
+
+Application Response: After processing the image, the application returns the result to the user, such as the
+ predicted jellyfish type or image classification.
+
+Error Handling: The application ensures handling of potential errors that may occur during image upload and processing.
+""")
