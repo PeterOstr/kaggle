@@ -58,23 +58,23 @@ if st.button('Send'):
 
 
 
-if st.button('Send2'):
-    if uploaded_file is not None:
-        st.image(uploaded_file, caption='Uploaded Image', use_column_width=True)
-        files = {'image_file': uploaded_file}
-
-    # Send the image to the backend
-        # Define the URLs for the two endpoints
-        url1 = "https://jellyapi-unk2qlgpqa-lm.a.run.app/classify_image/"
-        url2 = "https://jellyapp-unk2qlgpqa-lm.a.run.app/model/predict"
-        response2 = requests.post(url2, files=files)
-
-        if response2.status_code == 200:
-            result2 = response2.json()
-            st.write('Class:')
-            st.write(result2)
-        else:
-            st.error(f"Error sending the image: {response2.status_code}")
+# if st.button('Send2'):
+#     if uploaded_file is not None:
+#         st.image(uploaded_file, caption='Uploaded Image', use_column_width=True)
+#         files = {'image_file': uploaded_file}
+#
+#     # Send the image to the backend
+#         # Define the URLs for the two endpoints
+#         url1 = "https://jellyapi-unk2qlgpqa-lm.a.run.app/classify_image/"
+#         url2 = "https://jellyapp-unk2qlgpqa-lm.a.run.app/model/predict"
+#         response2 = requests.post(url2, files=files)
+#
+#         if response2.status_code == 200:
+#             result2 = response2.json()
+#             st.write('Class:')
+#             st.write(result2)
+#         else:
+#             st.error(f"Error sending the image: {response2.status_code}")
 
 st.sidebar.info("Feel free to contact me\n"'\n'
                 "[My GitHub](https://github.com/PeterOstr)\n"'\n'
