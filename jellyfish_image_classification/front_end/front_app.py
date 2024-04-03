@@ -52,6 +52,7 @@ if st.button('Send'):
             st.write('Predictions:')
             # for prediction in result['predictions']:
             #     st.write(f"Class: {prediction['class_name']}, Probability: {prediction['probability']}")
+            # st.write(result[0])
             st.write(result[0])
         else:
             st.error(f"Error sending the image: {response.status_code}")
