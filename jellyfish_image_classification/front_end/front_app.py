@@ -38,7 +38,7 @@ if st.button('Send'):
     if uploaded_file is not None:
         # Send the image to the backend
         # Define the URLs for the two endpoints
-        url = "https://jellyapi-unk2qlgpqa-lm.a.run.app/model/predict"
+        url = "https://jellyapi1-yxxcfdysba-lm.a.run.app/model/predict"
 
 
 
