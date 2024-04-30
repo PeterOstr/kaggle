@@ -2,3 +2,4 @@ build
 dist
 swagger_client.egg-info
 data
+lstm_model.h5
