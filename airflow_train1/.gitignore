@@ -3,3 +3,5 @@ dist
 swagger_client.egg-info
 data
 lstm_model.h5
+model1.h5
+my_xgb_model.joblib
