@@ -37,6 +37,7 @@ async def predict_xgb_t(data: Date_for_prediction_data):
 
 
 
-    model_prediction = model_xgb_t.predict(data_features)[0]
-    # model_prediction = model_prediction.reset_index().to_json()
-    return model_prediction
+    model_prediction = round(model_xgb_t.predict(data_features)[0],2)
+    #model_prediction = model_prediction.to_json()
+    #return model_prediction
+    return {"prediction": float(model_prediction)}  # Преобразуйте прогноз в тип float перед возвратом
