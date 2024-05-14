@@ -3,8 +3,10 @@ USER root
 
 COPY model_predict.py .
 COPY my_xgb_model.joblib .
-COPY requirements.txt /app/requirements.txt
+COPY my_catb_model.joblib .
 
-RUN pip install -r /app/requirements.txt
+COPY requirements.txt .
 
-ENTRYPOINT ["uvicorn","model_predict:app","--host","0.0.0.0","--port","8000"]
+RUN pip install -r requirements.txt
+
+ENTRYPOINT ["uvicorn","model_predict:app","--host","0.0.0.0","--port","8080"]

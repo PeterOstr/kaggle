@@ -6,3 +6,4 @@ pandas
 joblib
 typing
 xgboost
+catboost
