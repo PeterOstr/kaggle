@@ -4,7 +4,6 @@ USER root
 COPY model_predict.py .
 COPY my_xgb_model.joblib .
 COPY my_catb_model.joblib .
-COPY catboost_model.bin .
 
 COPY requirements.txt .
 

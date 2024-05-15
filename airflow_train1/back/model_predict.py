@@ -3,9 +3,6 @@ import pandas as pd
 import numpy as np
 from typing import List
 from pydantic import BaseModel
-import catboost
-from catboost import CatBoostRegressor
-from datetime import datetime
 from io import StringIO
 
 
@@ -26,9 +23,7 @@ class Date_for_prediction_data(BaseModel):
 model_xgb_t = joblib.load('my_xgb_model.joblib')
 model_catb_t = joblib.load('my_catb_model.joblib')
 
-# using bin-saved model as alternative
-catboost_model = CatBoostRegressor()
-catboost_model.load_model('catboost_model.bin')
+
 
 
 @app.post("/model/predict_xgb_t")
