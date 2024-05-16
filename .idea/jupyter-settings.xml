@@ -17,8 +17,11 @@
         <entry key="$PROJECT_DIR$/.idea/kaggle.iml">
           <value>
             <JupyterConnectionParameters>
-              <option name="managed" value="true" />
-              <option name="sdkName" value="" />
+              <option name="authType" value="notebook" />
+              <option name="urlString" value="http://localhost:8070" />
+              <authParams2>
+                <map />
+              </authParams2>
             </JupyterConnectionParameters>
           </value>
         </entry>
